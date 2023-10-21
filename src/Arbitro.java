@@ -10,7 +10,7 @@ public class Arbitro extends Persona{
         this.cantidadPD = cantidadPD;
     }
 
-    public double prima(){
+ /*   public double prima(){
         int contador = 0;
         if(añosTrabajados>5) {
             for (int i = 5; i < añosTrabajados; i++) {
@@ -18,7 +18,7 @@ public class Arbitro extends Persona{
                 contador++;
             }
         }
-    }
+    }*/
     public String mostrarInformacion() {
         return  "@======================@" +
                 "\nNombre: " + nombre + " " +
