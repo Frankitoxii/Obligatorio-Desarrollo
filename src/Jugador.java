@@ -41,7 +41,9 @@ public class Jugador extends Persona{
         this.minutosJ = minutosJ;
     }
 
-
+    public double prima(){
+        return super.salario+super.salario*0.2;
+    }
 
     public String mostrarInformacion() {
         return  "@======================@" +
