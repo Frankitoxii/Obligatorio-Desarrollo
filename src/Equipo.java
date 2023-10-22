@@ -15,6 +15,11 @@ public class Equipo {
         this.jugadores = jugadores;
     }
 
+    public Equipo(String nombre, List<Jugador> jugadores)
+    {
+        this.nombre = nombre;
+        this.jugadores = jugadores;
+    }
     public Equipo(String nombre)
     {
         this.nombre = nombre;
@@ -37,9 +42,14 @@ public class Equipo {
         return jugadores;
     }
 
-    public String mostrarInformacion()
+    public void mostrarInformacion()
     {
-        return this.jugadores + "Nombre del equipo:" + this.nombre;
+        System.out.println("Nombre del equipo: " + nombre);
+        for(Jugador jugador : jugadores)
+        {
+            System.out.println(jugador.nombre);
+        }
+
     }
 }
 

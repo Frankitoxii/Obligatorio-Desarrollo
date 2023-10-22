@@ -15,7 +15,7 @@ public class Main {
         while (!salir)
         {
             String[] mensajes = {
-                    "+----------------------------------------------------------------+",
+                    "+-------------------------+",
                     "Opciones:",
                     "0. Salir",
                     "1. Agregar un equipo",
@@ -23,7 +23,7 @@ public class Main {
                     "3. Opciones de tecnicos",
                     "4. Opciones de arbritos",
                     "5. Info equipos",
-                    "+----------------------------------------------------------------+",
+                    "+-------------------------+",
                     "Seleccione una opcion:"
             };
 
@@ -74,7 +74,7 @@ public class Main {
     {
         for(Equipo equipo : equipos)
         {
-            System.out.println(equipo.mostrarInformacion());
+            equipo.mostrarInformacion();
         }
     }
 
@@ -147,13 +147,13 @@ public class Main {
         String equipoJ = scanner.nextLine();
 
         // Validacion para el nombre del equipo (la lista de equipos debe tener almenos uno para que esto funcione)
-        /*for(Equipo equipo : equipos)
+        for(Equipo equipo : equipos)
         {
             if (!equipo.getNombre().equals(equipoJ))
             {
                 System.out.println("Este equipo no existe");
             }
-        }*/
+        }
 
         System.out.println("Ingrese la posición:");
         String posicion = scanner.nextLine();
@@ -162,20 +162,33 @@ public class Main {
         int minutosJ = scanner.nextInt();
         scanner.nextLine(); // Consumir la nueva línea
 
-        // Agregar el jugador a la lista
+        int jugadoresEquipo = 0;
+        for(Jugador jugador : jugadores) {
+            if(jugador.getEquipo().equals(equipoJ)) {
+                jugadoresEquipo++;
+            }
+        }
+
+        if(jugadoresEquipo == 7) {
+            String[] mensajes = {
+                    "+--------------------------------------------------+",
+                    "No es posible agregar más jugadores a este equipo.",
+                    "+--------------------------------------------------+",
+            };
+            for(String mensaje : mensajes)
+            {
+                System.out.println(mensaje);
+            }
+            return;
+        }
+
         jugadores.add(new Jugador(nombre, apellido, cedula, equipoJ, posicion, minutosJ));
-        System.out.println("");
+        equipos.add(new Equipo(equipoJ, jugadores));
         System.out.println("+---------------------------+");
-        System.out.println("Jugador ingresado con éxito!!");
+        System.out.println("Jugador ingresado con exito!!");
         System.out.println("+---------------------------+");
 
-        equipos.add(new Equipo(jugadores));
-        System.out.println();
-        System.out.println("+---------------------------+");
-        System.out.println("Jugador agregado con éxito al equipo!!");
-        System.out.println("+---------------------------+");
     }
-
 
     static void eliminarJugador(List<Jugador> jugadores)
     {
@@ -344,14 +357,15 @@ public class Main {
         scanner.nextLine(); // Consumir la nueva línea
 
         System.out.println("Ingrese el nombre del equipo:");
-        String equipo = scanner.nextLine();
+        String equipoT= scanner.nextLine();
 
         //Agregar el tecnico a la lista
-        tecnicos.add(new Tecnico(nombre, apellido, cedula, equipo));
+        tecnicos.add(new Tecnico(nombre, apellido, cedula, equipoT));
         System.out.println("");
         System.out.println("+---------------------------+");
         System.out.println("Tecnico ingresado con exito!!");
         System.out.println("+---------------------------+");
+
 
     }
 
@@ -549,7 +563,6 @@ public class Main {
             System.out.println(arbitro.mostrarInformacion());
         }
     }
-
 
 
 
