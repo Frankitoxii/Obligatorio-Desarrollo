@@ -69,7 +69,6 @@ public class Main {
     equipos.add(new Equipo(nombreEquipo));
 }
 
-          /*SIN TERMINAR*/
     static void infoEquipos()
     {
         for(Equipo equipo : equipos)
@@ -146,14 +145,20 @@ public class Main {
         System.out.println("Ingrese el nombre del equipo:");
         String equipoJ = scanner.nextLine();
 
-        // Validacion para el nombre del equipo (la lista de equipos debe tener almenos uno para que esto funcione)
-        for(Equipo equipo : equipos)
-        {
-            if (!equipo.getNombre().equals(equipoJ))
-            {
-                System.out.println("Este equipo no existe");
+        // Buscar el equipo en la lista de equipos
+        Equipo equipoSeleccionado = null;
+        for (Equipo equipo : equipos) {
+            if (equipo.getNombre().equals(equipoJ)) {
+                equipoSeleccionado = equipo;
+                break;
             }
         }
+
+        if (equipoSeleccionado == null) {
+            System.out.println("Este equipo no existe");
+            return;
+        }
+
 
         System.out.println("Ingrese la posición:");
         String posicion = scanner.nextLine();
@@ -183,12 +188,17 @@ public class Main {
         }
 
         jugadores.add(new Jugador(nombre, apellido, cedula, equipoJ, posicion, minutosJ));
-        equipos.add(new Equipo(equipoJ, jugadores));
+
         System.out.println("+---------------------------+");
         System.out.println("Jugador ingresado con exito!!");
         System.out.println("+---------------------------+");
 
-    }
+        equipoSeleccionado.agregarJugador(new Jugador(nombre, apellido, cedula, equipoJ, posicion, minutosJ));
+        System.out.println("+-------------------------------------+");
+        System.out.println("Jugador ingresado con exito al equipo");
+        System.out.println("+-------------------------------------+");
+
+        }
 
     static void eliminarJugador(List<Jugador> jugadores)
     {
@@ -358,6 +368,27 @@ public class Main {
 
         System.out.println("Ingrese el nombre del equipo:");
         String equipoT= scanner.nextLine();
+
+        int tecnicoEquipo = 0;
+        for(Equipo equipo : equipos)
+        {
+            if(equipo.getNombre().equals(equipoT))
+            {
+                tecnicoEquipo ++;
+            }
+        }
+        if(tecnicoEquipo == 2) {
+            String[] mensajes = {
+                    "+--------------------------------------------------+",
+                    "No es posible agregar más tecnicos a este equipo.",
+                    "+--------------------------------------------------+",
+            };
+            for(String mensaje : mensajes)
+            {
+                System.out.println(mensaje);
+            }
+            return;
+        }
 
         //Agregar el tecnico a la lista
         tecnicos.add(new Tecnico(nombre, apellido, cedula, equipoT));
