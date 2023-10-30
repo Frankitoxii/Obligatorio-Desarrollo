@@ -21,6 +21,10 @@ public class Equipo {
         this.jugadores = new ArrayList<>();
     }
 
+    public Equipo() {
+
+    }
+
     public String getNombre() {
         return nombre;
     }

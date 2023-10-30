@@ -3,13 +3,15 @@ import java.time.LocalTime;
 
 
 public class Partido {
+    private int id;
     private Equipo local;
     private Equipo visitante;
-    private Arbitro arbitro;
+    private int arbitro;
     private LocalDate fecha;
     private LocalTime hora;
 
-    public Partido(Equipo local, Equipo visitante, Arbitro arbitro, LocalDate fecha, LocalTime hora) {
+    public Partido(int id,Equipo local, Equipo visitante, int arbitro, LocalDate fecha, LocalTime hora) {
+        this.id=id;
         this.local = local;
         this.visitante = visitante;
         this.arbitro = arbitro;
@@ -17,8 +19,17 @@ public class Partido {
         this.hora = hora;
     }
 
-    public void precalentamiento(){
-        System.out.println("Los jugadores están precalentando(15 mins)");
-        System.out.println("El árbitro está precalentando(10 mins)");
+    public int getId() {
+        return id;
+    }
+    public String mostrarInformacion() {
+        return  "@======================@" +
+                "\nId: " + id + " " +
+                "\nEquipo local : " + local.getNombre() + " " +
+                "\nEquipo visitante: " + visitante.getNombre() + " " +
+                "\nArbitro: " + arbitro + " " +
+                "\nFecha: " + fecha + " " +
+                "\nHora: " + hora + " " +
+                "\n@======================@";
     }
 }

@@ -12,6 +12,10 @@ public abstract class Persona {
         this.cedula = cedula;
     }
 
+   public  abstract double prima();
+    public Persona(double salario) {
+    }
+
     public void setCedula(int cedula) {
         this.cedula = cedula;
     }
@@ -43,4 +47,6 @@ public abstract class Persona {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
 }
+
