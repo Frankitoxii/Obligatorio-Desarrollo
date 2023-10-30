@@ -21,34 +21,36 @@ public class Equipo {
         this.jugadores = new ArrayList<>();
     }
 
-    public Equipo() {
-
-    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public Tecnico getTecnico()
-    {
-        return tecnico;
-    }
-
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
 
     public void agregarJugador(Jugador jugador) {
         jugadores.add(jugador);
     }
 
+    public void agregarTecnico(Tecnico tecnico)
+    {
+       this.tecnico = tecnico;
+    }
+
     public void mostrarInformacion()
     {
+        //Colores para la consola
+        String RESET = "\u001B[0m";
+        String PURPLE = "\u001B[35m";
+        System.out.println(PURPLE + "@=================================================@");
         System.out.println("Nombre del equipo: " + nombre);
         System.out.println("Jugadores: ");
         for (Jugador jugador : jugadores) {
-            System.out.println("\nNombre: " + jugador.getNombre() + " Apellido: " + jugador.getApellido() + " Posicion: " + jugador.getPosicion());
+            System.out.println("Nombre: " + jugador.getNombre() + " Apellido: " + jugador.getApellido() + " Posicion: " + jugador.getPosicion());
         }
+        System.out.printf(" ");
+        System.out.println("Tecnico:");
+        System.out.println("Nombre " + this.tecnico.getNombre() + " Apellido" +this.tecnico.getApellido());
+        System.out.println("@=================================================@" + RESET);
     }
 }
 

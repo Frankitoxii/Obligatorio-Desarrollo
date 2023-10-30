@@ -526,6 +526,10 @@ public class Main {
             System.out.println("");
             System.out.println(GREEN + "[Tecnico ingresado con exito]" + RESET);
             System.out.println("");
+
+        equipoSeleccionado.agregarTecnico(new Tecnico(nombre, apellido,cedula, partidosG, equipoT));
+        System.out.println(" ");
+        System.out.println(GREEN + "[Tecnico ingresado con exito al equipo]" + RESET);
         }
 
     static void eliminarTecnico(List<Tecnico> tecnicos)
@@ -692,7 +696,8 @@ public class Main {
 
     }
 
-    static void precalentamientoArbitro(){
+    static void precalentamientoArbitro()
+    {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese la cedula del arbitro");
         int cedula = scanner.nextInt();
@@ -894,53 +899,64 @@ public class Main {
 
     static void agregarPartido(List<Partido> partidos)
     {
-        Scanner scanner = new Scanner(System.in);
+        //Colores para la consola
+        String RESET = "\u001B[0m";
+        String RED = "\u001B[31m";
+        String GREEN = "\u001B[32m";
 
-        System.out.println("Ingrese id de partido: ");
-        int id=scanner.nextInt();
-        scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ingrese el equipo local:");
         String local = scanner.nextLine();
 
-        Equipo equipo1 = new Equipo();
         for(Equipo equipo:equipos){
-            if(equipo.getNombre().equals(local)){
-                equipo = equipo1;
+            if(equipo.getNombre().equals(local))
+            {
+               break;
+            }
+            else
+            {
+                System.out.println(" ");
+                System.out.println(RED + "[Este equipo no existe]" + RESET);
+                return;
             }
         }
 
         System.out.println("Ingrese el equipo visitante:");
         String visitante = scanner.nextLine();
-        Equipo equipo2 = new Equipo();
-        for(Equipo equipo:equipos){
-            if(equipo.getNombre().equals(local)){
-                equipo = equipo2;
+
+        /*for(Equipo equipoB:equipos){
+            if(equipoB.getNombre().equals(visitante))
+            {
+              break;
             }
-        }
+            else
+            {
+                System.out.println(" ");
+                System.out.println(RED + "[Este equipo no existe]" + RESET);
+                return;
+            }
+        }*/
 
         System.out.println("Ingrese la cedula del árbitro:");
         int arbitro = scanner.nextInt();
-        int arbitroExiste;
-        int arbitroPartido = 0;
         scanner.nextLine();
-        for (Arbitro arbitroa:arbitros){
-            if(arbitroa.getCedula()==arbitro){
-                arbitroExiste = arbitro;
-                arbitroPartido++;
+
+        boolean arbitroEncontrado = false;
+
+        for (Arbitro arbitroa : arbitros) {
+            if (arbitroa.getCedula() == arbitro) {
+                if (arbitroEncontrado) {
+                    System.out.println(RED + "[Este árbitro ya fue asignado a este partido]" + RESET);
+                    return;
+                }
+
+                arbitroEncontrado = true;
             }
         }
 
-        if(arbitroPartido == 2) {
-            String[] mensajes = {
-                    "+--------------------------------------------------+",
-                    "No es posible agregar más árbitros a este partido.",
-                    "+--------------------------------------------------+",
-            };
-            for(String mensaje : mensajes)
-            {
-                System.out.println(mensaje);
-            }
+        if (!arbitroEncontrado) {
+            System.out.println(RED + "[Este árbitro no existe]" + RESET);
             return;
         }
 
@@ -957,15 +973,18 @@ public class Main {
 
 
         //Agregar el partido a la lista
-        partidos.add(new Partido(id,equipo1,equipo2,arbitro,fechaParseada,horaParseada));
+        partidos.add(new Partido(visitante,local,arbitro,fechaParseada,horaParseada));
         System.out.println("");
-        System.out.println("+---------------------------+");
-        System.out.println("Partido ingresado con exito!!");
-        System.out.println("+---------------------------+");
+        System.out.println(GREEN + "[Partido ingresado con exito]" + RESET);
     }
 
     static void eliminarPartido(List<Partido> partidos)
     {
+        //Colores para la consola
+        String RESET = "\u001B[0m";
+        String RED = "\u001B[31m";
+        String GREEN = "\u001B[32m";
+
         Scanner scanner = new Scanner(System.in);
         boolean partidoEncontrado = false;
 
@@ -976,9 +995,8 @@ public class Main {
             if (partido.getId() == id)
             {
                 partidos.remove(partido);
-                System.out.println("+---------------------------+");
-                System.out.println("Partido eliminado con éxito!!");
-                System.out.println("+---------------------------+");
+                System.out.println(" ");
+                System.out.println(GREEN + "[Partido eliminado con éxito]" + RESET);
                 partidoEncontrado = true;
                 break;
             }
@@ -986,9 +1004,8 @@ public class Main {
         }
         if(!partidoEncontrado)
         {
-            System.out.println("+--------------------+");
-            System.out.println("El partido no existe!!");
-            System.out.println("+--------------------+");
+            System.out.println(" ");
+            System.out.println(RED + "[El partido no existe]" + RESET);
         }
     }
 
