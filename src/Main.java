@@ -508,9 +508,9 @@ public class Main {
                 return;
             }
 
-            /*int tecnicosEnEquipo = 0;
+            int tecnicosEnEquipo = 0;
             for (Tecnico tecnico : tecnicos) {
-            if (tecnico.getEquipo().equals(equipoSeleccionado)) {
+            if (tecnico.getEquipo().equals(equipoSeleccionado.getNombre())) {
                 tecnicosEnEquipo++;
              }
             }
@@ -519,7 +519,7 @@ public class Main {
                 System.out.println(RED + "[No es posible agregar mas tecnicos a este equipo]" + RESET);
                 System.out.println("");
                 return;
-            }*/
+            }
 
             //Agregar el tecnico a la lista
             tecnicos.add(new Tecnico(nombre, apellido, cedula, partidosG, equipoT));

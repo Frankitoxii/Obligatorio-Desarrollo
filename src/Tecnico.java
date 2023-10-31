@@ -12,6 +12,9 @@ public class Tecnico extends Persona{
         return partidosG;
     }
 
+    public String getEquipo() {
+        return equipo;
+    }
 
     public void setEquipo(String equipo) {
         this.equipo = equipo;
